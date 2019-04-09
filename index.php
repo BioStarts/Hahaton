@@ -29,16 +29,41 @@ switch ($_GET['query']) {
 
     case 'case':
         $id = $_GET['id'];
-        echo json_encode($case->findById($id));
+        if (isset($id)) {
+            echo json_encode($case->findById($id));
+        } else {
+            $title   = $_POST['title'];
+            $desc    = $_POST['description'];
+            $contact = $_POST['title'];
+
+            echo $case->create($title, $desc);
+        }
         break;
 
+    //создание кейса
+    //назначение кейса (делаем проверку что эксперт level 100+)
+    //изменение статуса кейса
+
+    //сообщения по мессадж ид (добавить колонку msg_id)
     case 'messages':
-        echo json_encode($message->all());
+        $chatId = $_GET['chat_id'];
+        if (isset($chatId)) {
+            echo json_encode($message->findByChatId($chatId));
+        } else {
+            echo json_encode($message->all());
+        }
         break;
 
     case 'message':
         $id = $_GET['id'];
-        echo json_encode($message->findById($id));
+        if (isset($id)) {
+            echo json_encode($message->findById($id));
+        } else {
+            $user = $_POST['user'];
+            $text = $_POST['text'];
+
+            echo $message->create($user, $text);
+        }
         break;
 
     case 'login':

@@ -15,4 +15,18 @@ class Messages extends Controller
         $stmt = $this->connect->execute($sql);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+
+    public function findByChatId(int $chatId)
+    {
+        $sql = "select * from `message` where chat_id= {$chatId}";
+        $stmt = $this->connect->execute($sql);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function create($user, $text)
+    {
+        $sql = "insert into `message` (`user_id`, `message`) value ($user, '$text')";
+        $result = $this->connect->execute($sql);
+        return $result ? 'ok' : false;
+    }
 }
