@@ -29,4 +29,11 @@ class Cases extends Controller
         $result = $this->connect->execute($sql);
         return $result ? 'ok' : false;
     }
+
+    public function setStatus($id, $newStatus)
+    {
+        $sql = "update `case` set `status`=$newStatus where id=$id";
+        $result = $this->connect->execute($sql);
+        return $result ? 'ok' : false;
+    }
 }

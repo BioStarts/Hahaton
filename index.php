@@ -40,6 +40,13 @@ switch ($_GET['query']) {
                         $case->assign($id, $assignerId, $assigneeId);
                     }
                     break;
+                case 'status':
+                    $newStatus = $_POST['status'];
+
+                    if (in_array($newStatus, [0, 1 ,2])) {
+                        $case->setStatus($id, $newStatus);
+                    }
+                    break;
                 default:
                     echo json_encode($case->findById($id));
             }
