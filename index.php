@@ -48,9 +48,9 @@ switch ($_GET['query']) {
                 case 'create':
                     $title = $_POST['title'];
                     $desc = $_POST['description'];
-                    $contact = $_POST['title'];
+                    $contact = $_POST['contact'];
 
-                    echo $case->create($title, $desc);
+                    echo $case->create($title, $desc, $contact);
                     break;
                 default:
             }
@@ -76,8 +76,9 @@ switch ($_GET['query']) {
         if (isset($id)) {
             echo json_encode($message->findById($id));
         } else {
-            $user = $_POST['user'];
-            $text = $_POST['text'];
+            $user   = $_POST['user'];
+            $text   = $_POST['text'];
+            $chatId = $_POST['chat_id'];
 
             echo $message->create($user, $text);
         }

@@ -16,9 +16,9 @@ class Cases extends Controller
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function create($title, $description)
+    public function create($title, $description, $contact)
     {
-        $sql = "insert into `case` (`title`, `description`) value ('$title', '$description')";
+        $sql = "insert into `case` (`title`, `description`) value ('$title', '$description', '$contact')";
         $result = $this->connect->execute($sql);
         return $result ? 'ok' : false;
     }
