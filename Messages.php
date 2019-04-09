@@ -23,10 +23,10 @@ class Messages extends Controller
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function create($user, $text)
+    public function create($user, $text, $chatId)
     {
-        $sql = "insert into `message` (`user_id`, `message`) value ($user, '$text')";
+        $sql = "insert into `message` (`user_id`, `message`, `chat_id`) value ($user, '$text', $chatId)";
         $result = $this->connect->execute($sql);
-        return $result ? 'ok' : false;
+        return $result ? [] : false;
     }
 }

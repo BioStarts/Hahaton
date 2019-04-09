@@ -87,7 +87,7 @@ switch ($_GET['query']) {
             $text   = $_POST['text'];
             $chatId = $_POST['chat_id'];
 
-            echo $message->create($user, $text);
+            echo $message->create($user, $text, $chatId);
         }
         break;
 
