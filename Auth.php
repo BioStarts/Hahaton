@@ -10,6 +10,10 @@ class Auth extends Controller
         $sql = <<<SQL
 select * from user where username='{$username}' and password='{$password}'
 SQL;
-        return $this->connect->getConnection()->execute($sql);
+
+        $stmt = $this->connect->execute($sql);
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return $user ?? [];
     }
 }

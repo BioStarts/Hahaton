@@ -8,6 +8,13 @@ class User extends Controller
         $sql = "select * from user limit $limit";
         $stmt = $this->connect->getConnection()->execute($sql);
 
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function findById(int $id)
+    {
+        $sql = "select * from `user` where id= {$id}";
+        $stmt = $this->connect->execute($sql);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
