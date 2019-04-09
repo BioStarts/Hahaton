@@ -30,13 +30,30 @@ switch ($_GET['query']) {
     case 'case':
         $id = $_GET['id'];
         if (isset($id)) {
-            echo json_encode($case->findById($id));
-        } else {
-            $title   = $_POST['title'];
-            $desc    = $_POST['description'];
-            $contact = $_POST['title'];
+            switch ($_POST['action']) {
+                case 'assign':
+                    $assignerId = $_POST['assigner'];
+                    $assigneeId = $_POST['assignee'];
 
-            echo $case->create($title, $desc);
+                    $assigner = $user->findById($id);
+                    if ($assigner && $assigner['level'] > 300) {
+                        $case->assign($id, $assignerId, $assigneeId);
+                    }
+                    break;
+                default:
+                    echo json_encode($case->findById($id));
+            }
+        } else {
+            switch ($_POST['action']) {
+                case 'create':
+                    $title = $_POST['title'];
+                    $desc = $_POST['description'];
+                    $contact = $_POST['title'];
+
+                    echo $case->create($title, $desc);
+                    break;
+                default:
+            }
         }
         break;
 

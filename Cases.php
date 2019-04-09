@@ -22,4 +22,11 @@ class Cases extends Controller
         $result = $this->connect->execute($sql);
         return $result ? 'ok' : false;
     }
+
+    public function assign($id, $assigner, $assignee)
+    {
+        $sql = "update `case` set assigner=$assigner, assignee=$assignee where id=$id";
+        $result = $this->connect->execute($sql);
+        return $result ? 'ok' : false;
+    }
 }
